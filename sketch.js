@@ -81,9 +81,9 @@ function draw(){
 }
 
 function mouseDragged(){
-    //if (gameState!=="launched"){
+    if (gameState!=="launched"){
         Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
-    //}
+    }
 }
 
 
@@ -95,6 +95,9 @@ function mouseReleased(){
 function keyPressed(){
     if(keyCode === 32){
        slingshot.attach(bird.body);
+       bird.trajectory = []
+       Matter.Body.setPosition(bird.body,{x: 200, y: 50})
+gameState = "onSling"
     }
 }
 
@@ -105,7 +108,7 @@ async function getBackgroundImg(){
     var datetime = responseJSON.datetime;
     var hour = datetime.slice(11,13);
     
-    if(hour>=0600 && hour<=1900){
+    if(hour>=06 && hour<=19){
         bg = "sprites/bg1.png";
     }
     else{
